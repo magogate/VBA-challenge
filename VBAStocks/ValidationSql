@@ -1,0 +1,144 @@
+
+select abc.column1
+, column6 - column3 as YearlyChng
+, case when column3 = 0 then 0 else round(((column6 - column3)/column3) * 100,2) end as PerChange into #2016
+from(
+select a.column1
+, a.column3
+from dbo.[2016] a
+join (
+       select column1
+       , min(column2) column2
+       from dbo.[2016]
+       Group By column1
+)b
+on a.column1 = b.column1
+and a.column2 = b.column2
+)abc
+join(
+select a.column1
+, a.column6
+from dbo.[2016] a
+join (
+       select column1
+       , max(column2) column2
+       from dbo.[2016]
+       Group By column1
+)b
+on a.column1 = b.column1
+and a.column2 = b.column2
+)pqr
+on abc.column1 = pqr.column1
+
+select *--max(PerChange ), min(PerChange )
+from #2016 
+order by column1
+--order by cast(PerChange as decimal) desc
+
+select max(PerChange ), min(PerChange )
+from #2016 
+
+select column1, Sum(cast(column7 as bigint))
+from dbo.[2016]
+group by column1
+order by 2 desc
+
+
+
+select abc.column1
+, column6 - column3 as YearlyChng
+, case when column3 = 0 then 0 else round(((column6 - column3)/column3) * 100,2) end as PerChange into #2015
+from(
+select a.column1
+, a.column3
+from dbo.[2015] a
+join (
+       select column1
+       , min(column2) column2
+       from dbo.[2015]
+       Group By column1
+)b
+on a.column1 = b.column1
+and a.column2 = b.column2
+)abc
+join(
+select a.column1
+, a.column6
+from dbo.[2015] a
+join (
+       select column1
+       , max(column2) column2
+       from dbo.[2015]
+       Group By column1
+)b
+on a.column1 = b.column1
+and a.column2 = b.column2
+)pqr
+on abc.column1 = pqr.column1
+order by column1
+
+select *--max(PerChange ), min(PerChange )
+from #2015
+order by column1
+--order by cast(PerChange as decimal) desc
+
+select max(PerChange ), min(PerChange )
+from #2015 
+
+select column1, Sum(cast(column7 as bigint))
+from dbo.[2015]
+group by column1
+order by 2 desc
+
+
+
+
+select abc.column1
+, column6 - column3 as YearlyChng
+, case when column3 = 0 then 0 else round(((column6 - column3)/column3) * 100,2) end as PerChange into #2014
+from(
+select a.column1
+, a.column3
+from dbo.[2014] a
+join (
+       select column1
+       , min(column2) column2
+       from dbo.[2014]
+       Group By column1
+)b
+on a.column1 = b.column1
+and a.column2 = b.column2
+)abc
+join(
+select a.column1
+, a.column6
+from dbo.[2014] a
+join (
+       select column1
+       , max(column2) column2
+       from dbo.[2014]
+       Group By column1
+)b
+on a.column1 = b.column1
+and a.column2 = b.column2
+)pqr
+on abc.column1 = pqr.column1
+order by column1
+
+
+
+
+select *--max(PerChange ), min(PerChange )
+from #2014
+order by column1
+--order by cast(PerChange as decimal) desc
+
+select max(PerChange ), min(PerChange )
+from #2014 
+
+select column1, Sum(cast(column7 as bigint))
+from dbo.[2014]
+group by column1
+order by 2 desc
+
+

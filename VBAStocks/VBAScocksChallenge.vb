@@ -1,5 +1,7 @@
 'Written By : Mandar Gogate
 'Written On : 09/02/2019
+'Modified On : 09/03/2019
+	'Reinitialize the value of total sum at line#102
 'Referances are as below
 '1. To get last row and iterate through differance worksheets and activate worksheet
 ' https://www.youtube.com/watch?v=Jyls2ZTIqUo&list=PLMM5e6ePXVqK7KKnebxZ4hMRokGTpe0Zw&index=17
@@ -75,11 +77,13 @@ Sub processData()
                     'separate arrayList for each ticker
                     Set myArrayList = CreateObject("System.Collections.ArrayList")
                     
-                    tickerSum = tickerSum - Cells(rowCnt, 7).Value
+                    'if we are not proecssing last row we need to take values from one row before
                     If (rowCnt = lastRow) Then
                         cl = Cells(rowCnt, 6).Value
+						tickerSum = tickerSum - 0
                     Else
                         cl = Cells(rowCnt - 1, 6).Value
+						tickerSum = tickerSum - Cells(rowCnt, 7).Value
                     End If
                     
                     'Adding elements in ArrayList
@@ -95,6 +99,7 @@ Sub processData()
                     myArrayListOuter.Add myArrayList
                     
                     tickerSum = 0
+					tickerSum = tickerSum + Cells(rowCnt, 7).Value
                 End If
                 
                 If (myCurrentTicker <> myOldTicker) Then
